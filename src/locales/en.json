@@ -180,6 +180,7 @@
     },
     "not_complete": "Never seen complete",
     "right_click": {
+      "open_nzbsin": "Open in .in",
       "advanced": {
         "auto_tmm": "Automatic Torrent Management",
         "download_path": "Set Download Path",
