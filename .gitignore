@@ -31,3 +31,4 @@ vuetorrent-demo/**
 docker/**
 coverage/
 config/
+.vs
