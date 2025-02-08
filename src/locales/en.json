@@ -180,7 +180,11 @@
     },
     "not_complete": "Never seen complete",
     "right_click": {
+      "open_external": "Open external",
       "open_nzbsin": "Open in .in",
+      "open_omg": "Open in OMG",
+      "open_srrdb": "Open in srrDB",
+      "open_integrity": "Open integrity",
       "advanced": {
         "auto_tmm": "Automatic Torrent Management",
         "download_path": "Set Download Path",
@@ -204,7 +208,8 @@
         "hash": "Hash",
         "magnet": "Magnet",
         "name": "Name",
-        "title": "Copy"
+        "title": "Copy",
+        "withCategory": "Copy with category"
       },
       "export": "Export torrent | Export torrents",
       "info": "Show Info",

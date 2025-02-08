@@ -150,15 +150,72 @@
     });
   }
 
-  async function openExternalUrl() {
+  async function openExternalNzbsIn() {
     if (torrents.value) {
       const ts = [...torrents.value]
 
       for (let i = 0; i < ts.length; i++) {
         let nm = ts[i].name.split('[')[0]
-        window.open('https://v2.nzbs.in/search?category=&query=' + nm + '&exact=on', '_blank')
+        window.open('https://nzbs.in/search?category=&query="' + nm + '"', '_blank')
         await waitforme(1000);
       }
+    }
+  }
+
+  async function openExternalOmg() {
+    if (torrents.value) {
+      const ts = [...torrents.value]
+
+      for (let i = 0; i < ts.length; i++) {
+        let nm = ts[i].name.split('[')[0]
+        window.open("https://omgwtfnzbs.org/browse?search=" + nm + "&cat=default", '_blank')
+        await waitforme(1000);
+      }
+    }
+  }
+
+  async function openExternalSrrDb() {
+    if (torrents.value) {
+      const ts = [...torrents.value]
+
+      for (let i = 0; i < ts.length; i++) {
+        let nm = ts[i].name.split('[')[0]
+        window.open("https://www.srrdb.com/release/details/" + nm, '_blank')
+        await waitforme(1000);
+      }
+    }
+  }
+
+  async function openExternalIntegrity() {
+    if (torrents.value) {
+      const ts = [...torrents.value]
+
+      for (let i = 0; i < ts.length; i++) {
+        let nm = ts[i].name.split('[')[0]
+        window.open("https://integrity.atmegatron.club/details/" + nm + "/html", '_blank')
+        await waitforme(1000);
+      }
+    }
+  }
+
+  async function copyWithCategory(multipleSeparator: string = "\n") {
+    if (torrents.value) {
+      const ts = [...torrents.value]
+      let str: string[] = []
+
+      for (let i = 0; i < ts.length; i++) {
+        let nm = ts[i].name;
+        str.push(ts[i].category + "/" + nm)
+      }
+
+      try {
+        await navigator.clipboard.writeText(str.join(multipleSeparator))
+      } catch (error) {
+        toast.error(t('toast.copy.error'))
+        return
+      }
+
+      toast.success(t('toast.copy.success'))
     }
   }
 
@@ -373,6 +430,11 @@
           hidden: !appStore.isFeatureAvailable('5.0.0'),
           disabled: !torrent.value?.comment,
           action: async () => torrent.value && (await copyValue(torrent.value.comment))
+        },
+        {
+          text: t('dashboard.right_click.copy.withCategory'),
+          icon: 'mdi-content-copy',
+          action: async () => torrent.value && await copyWithCategory(" ")
         }
       ]
     },
@@ -388,9 +450,26 @@
       action: () => router.push({ name: 'torrentDetail', params: { hash: hash.value } })
     },
     {
-      text: t('dashboard.right_click.open_nzbsin'),
+      text: t('dashboard.right_click.open_external'),
       icon: 'mdi-open-in-new',
-      action: async () => torrent.value && await openExternalUrl()
+      children: [
+        {
+          text: t('dashboard.right_click.open_nzbsin'),
+          action: async () => torrent.value && await openExternalNzbsIn()
+        },
+        {
+          text: t('dashboard.right_click.open_omg'),
+          action: async () => torrent.value && await openExternalOmg()
+        },
+        {
+          text: t('dashboard.right_click.open_srrdb'),
+          action: async () => torrent.value && await openExternalSrrDb()
+        },
+        {
+          text: t('dashboard.right_click.open_integrity'),
+          action: async () => torrent.value && await openExternalIntegrity()
+        }
+      ]
     }
   ])
 </script>
