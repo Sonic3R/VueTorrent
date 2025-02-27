@@ -150,52 +150,33 @@
     });
   }
 
-  async function openExternalNzbsIn() {
+  async function openInExternalWebsite(url: string) {
     if (torrents.value) {
       const ts = [...torrents.value]
+      let arrs = ts.map((val, _, __) => val.name.split('[')[0]);
+      let uniques = [...new Set(arrs)]
 
-      for (let i = 0; i < ts.length; i++) {
-        let nm = ts[i].name.split('[')[0]
-        window.open('https://nzbs.in/search?category=&query="' + nm + '"', '_blank')
+      for (let i = 0; i < uniques.length; i++) {
+        window.open(url.replace("{0}", uniques[i]), '_blank');
         await waitforme(1000);
       }
     }
+  }
+
+  async function openExternalNzbsIn() {
+    await openInExternalWebsite('https://nzbs.in/search?category=&query="{0}"');
   }
 
   async function openExternalOmg() {
-    if (torrents.value) {
-      const ts = [...torrents.value]
-
-      for (let i = 0; i < ts.length; i++) {
-        let nm = ts[i].name.split('[')[0]
-        window.open("https://omgwtfnzbs.org/browse?search=" + nm + "&cat=default", '_blank')
-        await waitforme(1000);
-      }
-    }
+    await openInExternalWebsite("https://omgwtfnzbs.org/browse?search={0}");
   }
 
   async function openExternalSrrDb() {
-    if (torrents.value) {
-      const ts = [...torrents.value]
-
-      for (let i = 0; i < ts.length; i++) {
-        let nm = ts[i].name.split('[')[0]
-        window.open("https://www.srrdb.com/release/details/" + nm, '_blank')
-        await waitforme(1000);
-      }
-    }
+    await openInExternalWebsite("https://www.srrdb.com/release/details/{0}");
   }
 
   async function openExternalIntegrity() {
-    if (torrents.value) {
-      const ts = [...torrents.value]
-
-      for (let i = 0; i < ts.length; i++) {
-        let nm = ts[i].name.split('[')[0]
-        window.open("https://integrity.atmegatron.club/details/" + nm + "/html", '_blank')
-        await waitforme(1000);
-      }
-    }
+    await openInExternalWebsite("https://integrity.atmegatron.club/?keyword={0}&pageNum=1");
   }
 
   async function copyWithCategory(multipleSeparator: string = "\n") {
