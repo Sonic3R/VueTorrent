@@ -179,6 +179,10 @@
     await openInExternalWebsite("https://integrity.atmegatron.club/?keyword={0}&pageNum=1");
   }
 
+  async function openExternalMyList() {
+    await openInExternalWebsite("https://allnzbs.atmegatron.club/?keyword={0}&limit=20&sortBy=TITLE&orientationBy=ASCENDING&location=&pageNum=1");
+  }
+
   async function copyWithCategory(multipleSeparator: string = "\n") {
     if (torrents.value) {
       const ts = [...torrents.value]
@@ -449,6 +453,10 @@
         {
           text: t('dashboard.right_click.open_integrity'),
           action: async () => torrent.value && await openExternalIntegrity()
+        },
+        {
+          text: t('dashboard.right_click.open_my_list'),
+          action: async () => torrent.value && await openExternalMyList()
         }
       ]
     }
