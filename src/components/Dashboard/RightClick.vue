@@ -424,6 +424,11 @@
       ]
     },
     {
+      text: t('dashboard.right_click.copy.withCategory'),
+      icon: 'mdi-content-copy',
+      action: async () => torrent.value && await copyWithCategory(" ")
+    },
+    {
       text: t('dashboard.right_click.export', dashboardStore.selectedTorrents.length),
       icon: isMultiple.value ? 'mdi-download-multiple' : 'mdi-download',
       action: exportTorrents
