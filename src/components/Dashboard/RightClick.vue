@@ -183,6 +183,10 @@
     await openInExternalWebsite("https://allnzbs.atmegatron.club/?keyword={0}&limit=20&sortBy=TITLE&orientationBy=ASCENDING&location=&pageNum=1");
   }
 
+  async function openExternalShd() {
+    await openInExternalWebsite("https://scenehd.org/log.php?search={0}&type=0");
+  }
+
   async function copyWithCategory(multipleSeparator: string = "\n") {
     if (torrents.value) {
       const ts = [...torrents.value]
@@ -462,6 +466,10 @@
         {
           text: t('dashboard.right_click.open_my_list'),
           action: async () => torrent.value && await openExternalMyList()
+        },
+        {
+          text: t('dashboard.right_click.open_shd'),
+          action: async () => torrent.value && await openExternalShd()
         }
       ]
     }

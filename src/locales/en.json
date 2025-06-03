@@ -186,6 +186,8 @@
       "open_srrdb": "Open in srrDB",
       "open_integrity": "Open integrity",
       "open_my_list": "Open in my list",
+      "open_shd": "Open in SHD",
+      "search_similar_here": "Search similar here",
       "advanced": {
         "auto_tmm": "Automatic Torrent Management",
         "download_path": "Set Download Path",
